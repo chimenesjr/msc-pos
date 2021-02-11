@@ -1,0 +1,49 @@
+---
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t1.micro
+      - t2.micro
+  AvailabilityZone:
+    Type: String
+    Default: eu-west-1a
+    AllowedValues:
+      - eu-west-1a
+      - eu-west-2a
+  AllowPort:
+    Type: String
+    Default: '22'
+    AllowedValues:
+      - '22'
+      - '80'
+      - '8080'
+      - '443'
+  AllowIp:
+    Type: String
+    Default: '37.228.208.142/32'
+
+Resources:
+  MyEc2:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      AvailabilityZone: !Ref AvailabilityZone
+      InstanceType: !Ref InstanceType
+      KeyName: TU_Dublin
+      ImageId: ami-0bb3fad3c0286ebd5
+      SecurityGroups:
+        - !Ref MySecurityGroup
+  MySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Allow Port Connection"
+      SecurityGroupIngress:
+      - CidrIp: !Ref AllowIp
+        FromPort: !Ref AllowPort
+        IpProtocol: tcp
+        ToPort: !Ref AllowPort
+  MyEIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      InstanceId: !Ref MyEc2
