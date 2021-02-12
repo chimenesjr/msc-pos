@@ -1,0 +1,16 @@
+--- 
+- 
+  hosts: servers
+  tasks: 
+    - 
+      name: "Install Apache"
+      apt: "name=apache2 update_cache=yes state=latest"
+    -
+      name: create the page
+      shell: chown -R ubuntu /var/www/html/
+    -
+      name: delete default index
+      shell: rm /var/www/html/index.html
+    -
+      name: create new index
+      shell: echo "hello from ansible" > /var/www/html/index.html
