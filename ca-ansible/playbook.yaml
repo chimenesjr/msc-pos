@@ -6,7 +6,7 @@
       name: "Install Apache"
       apt: "name=apache2 update_cache=yes state=latest"
     -
-      name: create the page
+      name: Fix apache folder permission
       shell: chown -R ubuntu /var/www/html/
     -
       name: delete default index
