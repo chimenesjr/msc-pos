@@ -8,9 +8,16 @@ resource "aws_instance" "demo" {
 	  Name = var.TAGS
   }
 
-  count = var.COUNT
-  
   security_groups = [aws_security_group.allow_access.name]
+}
+
+resource "aws_eip" "myeip" {
+  vpc      = true
+}
+
+resource "aws_eip_association" "eip_assoc" {
+  instance_id   = aws_instance.demo.id
+  allocation_id = aws_eip.myeip.id
 }
 
 resource "aws_security_group" "allow_access" {
@@ -20,7 +27,7 @@ resource "aws_security_group" "allow_access" {
   ingress {
     from_port   = 22
     to_port     = 22
-    protocol    = "ssh"
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {

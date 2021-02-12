@@ -26,5 +26,5 @@ variable "TAGS" {
 }
 
 variable "COUNT" {
-  default = "2"
+  default = "1"
 }
