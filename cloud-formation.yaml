@@ -22,7 +22,7 @@ Parameters:
       - '443'
   AllowIp:
     Type: String
-    Default: '37.228.208.142/32'
+    Default: '0.0.0.0/0'
 
 Resources:
   MyEc2:
@@ -30,7 +30,7 @@ Resources:
     Properties:
       AvailabilityZone: !Ref AvailabilityZone
       InstanceType: !Ref InstanceType
-      KeyName: TU_Dublin
+      KeyName: tu_dublin3
       ImageId: ami-0bb3fad3c0286ebd5
       SecurityGroups:
         - !Ref MySecurityGroup

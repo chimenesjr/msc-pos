@@ -18,7 +18,7 @@ variable "INSTANCE_TYPE" {
 }
 
 variable "KEY_NAME" {
-  default = "tu_dublin"
+  default = "tu_dublin3"
 }
 
 variable "TAGS" {
